@@ -33,18 +33,20 @@ class LessonAdapter : RecyclerView.Adapter<LessonViewHolder>() {
      */
     class LessonViewHolder internal constructor(itemView: View) : BaseViewHolder(itemView) {
         internal fun onBind(lesson: Lesson) {
-            setText(R.id.tv_date, lesson.date?:"日期待定")
+            setText(R.id.tv_date, lesson.date ?: "日期待定")
             setText(R.id.tv_content, lesson.content!!)
-            val state = lesson.state
-            if (state != null) {
-                setText(R.id.tv_state, state.stateName()!!)
-                val colorRes = when (state) {
-                    Lesson.State.PLAYBACK -> R.color.playback
-                    Lesson.State.LIVE -> R.color.live
-                    Lesson.State.WAIT -> R.color.wait
+            val state = lesson.state.also {
+                if (it != null) {
+                    setText(R.id.tv_state, it.stateName()!!)
+                    val colorRes = when (it) {
+                        Lesson.State.PLAYBACK -> R.color.playback
+                        Lesson.State.LIVE -> R.color.live
+                        Lesson.State.WAIT -> R.color.wait
+                    }
+                    val backgroundColor = itemView.context.getColor(colorRes)
+                    getView<View>(R.id.tv_state).setBackgroundColor(backgroundColor)
                 }
-                val backgroundColor = itemView.context.getColor(colorRes)
-                getView<View>(R.id.tv_state).setBackgroundColor(backgroundColor)
+
             }
         }
 

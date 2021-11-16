@@ -16,7 +16,12 @@ class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
 //    constructor(context: Context) : this(context, null)
 
-    var paint = Paint();
+    private var paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
+    };
 
     var codeList = arrayOf(
         "kotlin",
@@ -35,11 +40,6 @@ class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         setGravity(Gravity.CENTER);
         setBackgroundColor(getContext().getColor(R.color.colorPrimary));
         setTextColor(Color.WHITE);
-
-        paint.isAntiAlias = true;
-        paint.style = Paint.Style.STROKE;
-        paint.color = getContext().getColor(R.color.colorAccent);
-        paint.strokeWidth = 6f.dp2px();
 
         updateCode();
     }
