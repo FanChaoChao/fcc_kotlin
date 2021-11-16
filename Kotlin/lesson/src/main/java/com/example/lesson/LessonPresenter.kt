@@ -35,13 +35,21 @@ class LessonPresenter {
     }
 
     fun showPlayback() {
-        val playbackLessons = arrayListOf<Lesson>()
-        for (lesson in lessons) {
-            if (lesson.state === Lesson.State.PLAYBACK) {
-                playbackLessons.add(lesson)
-            }
-        }
-        activity!!.showResult(playbackLessons)
+//        val playbackLessons = arrayListOf<Lesson>()
+//        for (lesson in lessons) {
+//            if (lesson.state === Lesson.State.PLAYBACK) {
+//                playbackLessons.add(lesson)
+//            }
+//        }
+//
+//        lessons.forEach{
+//            if (it.state === Lesson.State.PLAYBACK) {
+//                playbackLessons.add(it)
+//            }
+//        }
+
+//        var filter = lessons.filter { it.state === Lesson.State.PLAYBACK }
+        activity!!.showResult(lessons.filter { it.state === Lesson.State.PLAYBACK })
     }
 
 

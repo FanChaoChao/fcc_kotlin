@@ -1,5 +1,11 @@
 package com.example.app;
 
-public class World {
+import android.content.Context;
 
+import com.example.core.BaseApplication;
+
+public class World {
+    public void test(){
+        Context context = BaseApplication.currentApplication();
+    }
 }

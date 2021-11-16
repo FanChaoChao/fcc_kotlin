@@ -12,25 +12,11 @@ import com.example.app.R
 import com.example.core.utils.dp2px
 import java.util.*
 
-class CodeView : AppCompatTextView {
-    constructor(context:Context):this(context,null)
+class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : AppCompatTextView(context, attrs){
 
-    constructor(context: Context,attrs: AttributeSet?):super(context, attrs){
+//    constructor(context: Context) : this(context, null)
 
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
-        setGravity(Gravity.CENTER);
-        setBackgroundColor(getContext().getColor(R.color.colorPrimary));
-        setTextColor(Color.WHITE);
-
-        paint.isAntiAlias = true;
-        paint.style = Paint.Style.STROKE;
-        paint.color = getContext().getColor(R.color.colorAccent);
-        paint.strokeWidth = dp2px(6f);
-
-        updateCode();
-    }
-
-   var paint = Paint();
+    var paint = Paint();
 
     var codeList = arrayOf(
         "kotlin",
@@ -42,6 +28,22 @@ class CodeView : AppCompatTextView {
         "retrofit",
         "tcp/ip"
     )
+
+    init {
+
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
+        setGravity(Gravity.CENTER);
+        setBackgroundColor(getContext().getColor(R.color.colorPrimary));
+        setTextColor(Color.WHITE);
+
+        paint.isAntiAlias = true;
+        paint.style = Paint.Style.STROKE;
+        paint.color = getContext().getColor(R.color.colorAccent);
+        paint.strokeWidth = 6f.dp2px();
+
+        updateCode();
+    }
+
 
     fun updateCode() {
         val random = Random().nextInt(codeList.size);

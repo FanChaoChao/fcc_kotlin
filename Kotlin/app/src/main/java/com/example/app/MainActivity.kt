@@ -12,13 +12,13 @@ import com.example.core.utils.CacheUtils
 import com.example.core.utils.*
 import com.example.lesson.LessonActivity
 
-class MainActivity:AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val usernameKey = "username";
     private val passwordKey = "password";
 
-    private lateinit var et_username:EditText;
-    private lateinit var et_password:EditText;
-    private lateinit var et_code:EditText;
+    private lateinit var et_username: EditText;
+    private lateinit var et_password: EditText;
+    private lateinit var et_code: EditText;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,20 @@ class MainActivity:AppCompatActivity(), View.OnClickListener {
         val password = et_password.text.toString();
         val code = et_code.text.toString();
 
-       val user = User(username, password, code);
+        val user = User(username, password, code);
+        fun verify(user: User): Boolean {
+            if (user.username?.length ?: 0 < 4) {
+                toast("用户名不合法");
+                return false;
+            }
+            //私有变量保存password
+            var password = user.password;
+            if (password != null && password.length < 4) {
+                toast("密码不合法");
+                return false;
+            }
+            return true;
+        }
         if (verify(user)) {
             CacheUtils.save(usernameKey, username);
             CacheUtils.save(passwordKey, password);
@@ -58,17 +71,5 @@ class MainActivity:AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun verify(user: User): Boolean {
-        if (user.username != null && user.username!!.length < 4) {
-            toast("用户名不合法");
-            return false;
-        }
-        //私有变量保存password
-        var password = user.password;
-        if (password != null && password.length < 4) {
-            toast("密码不合法");
-            return false;
-        }
-        return true;
-    }
+
 }
