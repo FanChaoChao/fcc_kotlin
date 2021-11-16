@@ -1,0 +1,11 @@
+cookie  客户端记录服务器信息的工作机制
+移动端常用于登录
+作用 ： 登录管理，个性化，用户行为追踪
+
+Authorization
+Basic
+加在请求头中
+格式为 authorization : basic <username:password(base64ed)>
+bearer
+加在请求头中
+格式为 authorization : basic <bearer token>
