@@ -1,5 +1,6 @@
 package com.fan.myapplication
 
+import kotlinx.coroutines.*
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +13,20 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        CoroutineScope(Dispatchers.).launch{
+            val result1 = supendTestFun()
+            val result2 = supendTestFun(4)
+            println(result1+result2)
+            println("这是什么时候执行"+ Thread.currentThread().name)
+        }
+        println("最外层"+Thread.currentThread().name)
+    }
+    suspend fun supendTestFun(num:Int = 1):Int{
+        return withContext(Dispatchers.IO){
+            delay(1000)
+            println(Thread.currentThread().name+System.currentTimeMillis())
+            num
+        }
+
     }
 }
